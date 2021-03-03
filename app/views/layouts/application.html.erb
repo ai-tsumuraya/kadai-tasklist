@@ -10,6 +10,11 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="cantainer">
+      <%= render 'layouts/flash_messages' %>
+      
+      
+      <%= yield %>
+    </div>
   </body>
 </html>
