@@ -1,7 +1,6 @@
-class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
-  before_action :require_user_logged_in
-  before_action :correct_user, only: [:destroy]
+class TasksController < ApplicationController# before_action :set_task, only: [:show, :edit, :update, :destr
+  before_action :setup_page, only: [:show, :edit, :update, :destroy]
+  before_action :require_user_logged_in, only: [:index, :new, :create, :destroy]# before_action :correct_user, only: [:show, :edit, :update, :destr
   
   def index
     @task = current_user.tasks.build
@@ -54,6 +53,12 @@ class TasksController < ApplicationController
   
   
   private
+  
+  
+  def setup_page 
+    set_task
+    correct_user
+  end
   
   def set_task
     @task = Task.find(params[:id])
