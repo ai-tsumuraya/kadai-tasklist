@@ -4,11 +4,8 @@ class TasksController < ApplicationController
   before_action :correct_user, only: [:destroy]
   
   def index
-    if logged_in?
-      @task = current_user.tasks.build
-      @tasks = current_user.tasks.order(id: :desc)
-      # @task = Task.all
-    end
+    @task = current_user.tasks.build
+    @tasks = current_user.tasks.order(id: :desc)
   end
   
   def show
@@ -68,7 +65,7 @@ class TasksController < ApplicationController
   
   def correct_user
     @task = current_user.tasks.find_by(id: params[:id])
-    unless @micropost
+    unless @task
       redirect_to root_url
     end
   end
