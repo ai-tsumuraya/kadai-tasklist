@@ -7,7 +7,11 @@ class TasksController < ApplicationController
     if logged_in?
       @task = current_user.tasks.build
       @tasks = current_user.tasks.order(id: :desc)
-      @task = Task.all
+      puts "current user:"
+      puts current_user.name
+      puts "task user:"
+      puts @task.user.name
+      # @task = Task.all
     end
   end
   

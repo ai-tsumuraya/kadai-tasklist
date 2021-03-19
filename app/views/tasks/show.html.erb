@@ -1,8 +1,16 @@
-<h1>id: <%= @task.id %> のタスク詳細ページ</h1>
-
-<p>ステータス: <%= @task.status %></p>
-<p>タスク：<%= @task.content %></p>
-
-<%= link_to '一覧に戻る', tasks_path %>
-<%= link_to 'このタスクを編集する', edit_task_path(@task) %>
-<%= link_to 'このタスクを削除する', @task, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %>
+<% if current_user == @task.user %>
+  <h1>id: <%= @task.id %> のタスク詳細ページ</h1>
+  
+  <p>ステータス: <%= @task.status %></p>
+  <p>タスク：<%= @task.content %></p>
+  
+  <%= link_to '一覧に戻る', tasks_path %>
+  <%= link_to 'このタスクを編集する', edit_task_path(@task) %>
+  <%= link_to 'このタスクを削除する', @task, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %>
+<% else %>
+  <h1>新規登録</h1>
+    <div>
+      <%= link_to '新規登録', signup_path %>
+      <%= link_to 'ログイン', login_path %>
+    </div>
+<% end %>
