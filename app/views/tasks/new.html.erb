@@ -1,5 +1,4 @@
-<% if logged_in? %>
-  <h1>タスク新規作成ページ</h1>
+<h1>タスク新規作成ページ</h1>
   
   <p>ログイン完了ユーザ: <%= current_user.name %></p>
   
@@ -8,10 +7,3 @@
   
   
   <%= link_to '一覧に戻る', tasks_path %>
-<% else %>
-  <h1>新規登録</h1>
-    <div>
-      <%= link_to '新規登録', signup_path %>
-      <%= link_to 'ログイン', login_path %>
-    </div>
-<% end %>
