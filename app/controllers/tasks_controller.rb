@@ -1,6 +1,7 @@
 class TasksController < ApplicationController# before_action :set_task, only: [:show, :edit, :update, :destr
-  before_action :setup_page, only: [:show, :edit, :update, :destroy]
   before_action :require_user_logged_in
+  before_action :correct, only: [:show, :edit, :update, :destroy]
+  
   
   def index
     @tasks = current_user.tasks.order(id: :desc)
@@ -41,22 +42,13 @@ class TasksController < ApplicationController# before_action :set_task, only: [:
   
   
   private
-  
-  
-  def setup_page 
-    set_task
-    correct_user
-  end
-  
-  def set_task
-    @task = Task.find(params[:id])
-  end
-  
+
+
   def task_params
     params.require(:task).permit(:content, :status)
   end
   
-  def correct_user
+  def correct
     @task = current_user.tasks.find_by(id: params[:id])
     unless @task
       redirect_to root_url
